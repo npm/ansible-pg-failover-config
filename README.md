@@ -1,4 +1,4 @@
-# PG
+# PG Failover Config
 
 Configure a PG cluster with automated failover. Based on this post:
 
