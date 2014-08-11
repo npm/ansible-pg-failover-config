@@ -1,0 +1,10 @@
+---
+- name: clone master
+  sudo: true
+  command: "{{item}}"
+  ignore_errors: true
+  with_items:
+    - "service postgresql stop"
+    - "repmgr -R root -d repmgr -U postgres -h {{master_host}} standby clone --force"
+    - "service postgresql start"
+    - "repmgr -f /etc/repmgr/repmgr.conf standby register"
