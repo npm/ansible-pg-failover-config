@@ -18,7 +18,7 @@
     sudo: true
     lineinfile: >
       dest={{pg_config_postgresql_conf}}
-      line="wal_keep_segments = 400"
+      line="wal_keep_segments = 5000"
       regexp='^wal_keep_segments.*$'
 
   - name: turn on ssl
