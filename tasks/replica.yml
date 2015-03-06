@@ -20,7 +20,7 @@
   lineinfile: >
     dest="{{postgresql_data_directory}}/recovery.conf"
     line="archive_cleanup_command = 'pg_archivecleanup /mnt/postgresql/pg_xlog %r'"
-    regexp='^primary_conninfo =.*$'
+    regexp='^archive_cleanup_command =.*$'
 
 - name: register and start replica
   sudo: true
