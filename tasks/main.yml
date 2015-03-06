@@ -13,6 +13,34 @@
       line="host  replication  all  0.0.0.0/0  trust"
       regexp='^host  replication  all.*$'
 
+  # a few clever config changes.
+  - name: set max wal segments
+    sudo: true
+    lineinfile: >
+      dest={{pg_config_postgresql_conf}}
+      line="wal_keep_segments = 400"
+      regexp='^wal_keep_segments.*$'
+
+  - name: turn on ssl
+    sudo: true
+    lineinfile: >
+      dest={{pg_config_postgresql_conf}}
+      line="ssl = on"
+      regexp='^ssl.*=.*$'
+
+  - name: set ssl crt
+    sudo: true
+    lineinfile: >
+      dest={{pg_config_postgresql_conf}}
+      line="ssl_cert_file = '{{pg_config_ssl_cert_file}}'"
+      regexp='^ssl_cert_file.*=.*$'
+
+  - name: set ssl key
+    sudo: true
+    lineinfile: >
+      dest={{pg_config_postgresql_conf}}
+      line="ssl_key_file = '{{pg_config_ssl_key_file}}'"
+      regexp='^ssl_key_file.*=.*$'
 
   - name: setup passwordless ssh between pg nodes
     include: 'ssh-access.yml'
