@@ -19,7 +19,7 @@
   sudo: true
   lineinfile: >
     dest="{{postgresql_data_directory}}/recovery.conf"
-    line="archive_cleanup_command = 'pg_archivecleanup /mnt/postgresql/pg_xlog %r'"
+    line="archive_cleanup_command = '/usr/lib/postgresql/{{postgresql_version}}/bin/pg_archivecleanup /mnt/postgresql/pg_xlog %r'"
     regexp='^archive_cleanup_command =.*$'
 
 - name: register and start replica
